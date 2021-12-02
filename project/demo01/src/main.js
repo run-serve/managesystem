@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 //公用样式
 import './assets/styles/css/Base.less'
+//iconfont样式
+import './assets/styles/css/iconfont.css';
 
 import App from './App.vue'
 import router from './router'
