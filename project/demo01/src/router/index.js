@@ -25,66 +25,66 @@ const routes = [
       },
     //账号模块
       {
-        path: '/accountadd',
+        path: '/index/accountadd',
         name: 'accountadd',
         component: () => import( '../views/AccountAdd/AccountAdd.vue')
       },
       {
-        path: '/accountmanagement',
+        path: '/index/accountmanagement',
         name: 'accountmanagement',
         component: () => import( '../views/AccountManagement/AccountManagement.vue')
       },
       {
-        path: '/passwordmodify',
+        path: '/index/passwordmodify',
         name: 'passwordmodify',
         component: () => import( '../views/PasswordModify/PasswordModify.vue')
       },
       //商品模块
       {
-        path: '/goodsadd',
+        path: '/index/goodsadd',
         name: 'goodsadd',
         component: () => import( '../views/GoodsAdd/GoodsAdd.vue')
       },
       {
-        path: '/goddsmanagement',
+        path: '/index/goddsmanagement',
         name: 'goddsmanagement',
         component: () => import( '../views/GoddsManagement/GoddsManagement.vue')
       },
       //统计管理模块
       {
-        path: '/salesstatistics',
+        path: '/index/salesstatistics',
         name: 'salesstatistics',
         component: () => import( '../views/SalesStatistics/SalesStatistics.vue')
       },
       {
-        path: '/stockstatistics',
+        path: '/index/stockstatistics',
         name: 'stockstatistics',
         component: () => import( '../views/StockStatistics/StockStatistics.vue')
       },
       //进货管理模块
       {
-        path: '/inventoryadd',
+        path: '/index/inventoryadd',
         name: 'inventoryadd',
         component: () => import( '../views/InventoryAdd/InventoryAdd.vue')
       },
       {
-        path: '/inventorymanagement',
+        path: '/index/inventorymanagement',
         name: 'inventorymanagement',
         component: () => import( '../views/InventoryManagement/InventoryManagement.vue')
       },
       //出货管理模块
       {
-        path: '/saleslist',
+        path: '/index/saleslist',
         name: 'saleslist',
         component: () => import( '../views/SalesList/SalesList.vue')
       },
       {
-        path: '/outboundgoods',
+        path: '/index/outboundgoods',
         name: 'outboundgoods',
         component: () => import( '../views/OutboundGoods/OutboundGoods.vue')
       },
       {
-        path: '/goodsreturn',
+        path: '/index/goodsreturn',
         name: 'goodsreturn',
         component: () => import( '../views/GoodsReturn/GoodsReturn.vue')
       },

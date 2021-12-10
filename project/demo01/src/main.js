@@ -8,9 +8,19 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './assets/styles/css/Base.less'
 //iconfont样式
 import './assets/styles/css/iconfont.css';
+import './assets/styles/css/demo.css';
 
 import App from './App.vue'
 import router from './router'
+
+//导入axios
+import axios from 'axios'
+//axios挂载到原型
+Vue.prototype.axios = axios;
+
+//导入qs
+import qs from 'qs'
+Vue.prototype.qs = qs;
 
 
 Vue.use(ElementUI)

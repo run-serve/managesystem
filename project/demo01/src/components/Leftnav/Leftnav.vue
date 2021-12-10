@@ -19,10 +19,10 @@
             <span class="icon iconfont" v-html="menu.icon_code"></span>
             <span>{{menu.menuTitle}}</span>
         </template> 
-        <el-menu-item 
+        <el-menu-item
+            :index="subMenu.path"
             v-for="(subMenu, index) in menu.children"
             :key="index"
-            :index="subMenu.path"
             >
             {{subMenu.subMenuTitle}}
         </el-menu-item>  
@@ -40,7 +40,7 @@ export default {
         //系统信息
         {
           menuTitle: "系统管理",
-          icon_code: "&#xe835",
+          icon_code: "&#xe666",
           children: [
             {
               path: "/index",
@@ -51,7 +51,7 @@ export default {
         //账号管理
         {
           menuTitle: "账号管理",
-          icon_code: "&#xe71b",
+          icon_code: "&#xe7b5",
           children: [
             {
               path: "/index/accountmanagement",
@@ -70,7 +70,7 @@ export default {
         //商品管理
         {
           menuTitle: "商品管理",
-          icon_code: "&#xe65d",
+          icon_code: "&#xe6bf",
           children: [
             {
               path: "/index/goddsmanagement",
@@ -85,7 +85,7 @@ export default {
         //统计管理
         {
           menuTitle: "统计管理",
-          icon_code: "&#xe83f",
+          icon_code: "&#xe758",
           children: [
             {
               path: "/index/salesstatistics",
