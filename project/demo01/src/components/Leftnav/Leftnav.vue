@@ -1,8 +1,9 @@
 <template>
   <div class="left-nav">
     <!-- 导航组件 -->
+    <!-- default-active：当前激活菜单得index -->
     <el-menu
-      default-active="$route.path"
+      :default-active="$route.path"
       class="el-menu-vertical-demo"
       background-color="rgb(48, 65, 86)"
       active-text-color="rgb(64, 158, 255)"
@@ -10,23 +11,23 @@
       unique-opened
       router
     >
-    <el-submenu 
-    v-for="(menu, index) in menuData" 
-    :key="index" 
-    :index="(index + 1) + ''"
-    >
+      <el-submenu
+        v-for="(menu, index) in menuData"
+        :key="index"
+        :index="index + 1 + ''"
+      >
         <template slot="title">
-            <span class="icon iconfont" v-html="menu.icon_code"></span>
-            <span>{{menu.menuTitle}}</span>
-        </template> 
+          <span class="icon iconfont" v-html="menu.icon_code"></span>
+          <span>{{ menu.menuTitle }}</span>
+        </template>
         <el-menu-item
-            :index="subMenu.path"
-            v-for="(subMenu, index) in menu.children"
-            :key="index"
-            >
-            {{subMenu.subMenuTitle}}
-        </el-menu-item>  
-    </el-submenu>
+          :index="subMenu.path"
+          v-for="(subMenu, index) in menu.children"
+          :key="index"
+        >
+          {{ subMenu.subMenuTitle }}
+        </el-menu-item>
+      </el-submenu>
     </el-menu>
   </div>
 </template>

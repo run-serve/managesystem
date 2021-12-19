@@ -60,18 +60,14 @@
 <script>
 export default {
   data() {
-    const validatePwd = (_rule, value, callback) => {
-      //rule：验证规则对象  value：输入的值 callback： 函数
-      if (value === "") {
-        //验证非空
+    const validatePwd = (_rule, value, callback) => {//rule：验证规则对象  value：输入的值 callback： 函数
+      if (value === "") {//验证非空
         callback(new Error("请输入密码"));
-      } else if (value.length < 3 || value.length > 6) {
-        //验证字符长度
+      } else if (value.length < 3 || value.length > 6) {//验证字符长度
         callback(new Error("请输入3位到6位字符"));
       } else {
-        if (this.accountFrom.checkPass !== "") {
-          //验证确认密码是否非空
-          this.$refs.accountFrom.validateField("checkPass");
+        if (this.accountFrom.checkPass !== "") {//验证确认密码是否非空
+          this.$refs.accountFrom.validateField("checkPass");//validateField 方法是对部分数据做校验
         }
         //成功调用
         callback();
@@ -112,10 +108,8 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
-        //验证valid 通true  否false
+      this.$refs[formName].validate((valid) => {//验证valid 通true  否false
         if (valid) {
-          alert("添加成功!");
           // 收集添加账号信息
           const params ={
               account: this.accountFrom.account,
@@ -125,12 +119,23 @@ export default {
           //发送axios
           this.axios.post('http://127.0.0.1:666/account/accountadd/',this.qs.stringify(params))
                .then(response => {
-                // 返回添加成功
-                console.log(response.data);
+                //接受后端数据
+                let {code, reason}=response.data;
+                if(code === 0){//成功
+                 //弹成功提示框
+                    this.$message({
+                    message: reason,
+                    type: 'success'
+                    });
+                 //跳账号管理列表
+                    this.$router.push('/index/accountmanagement');
+                }else if(code === 1){//失败
+                //  弹失败框
+                   this.$message.error(reason);
+                }
                })
                .catch(err =>{
-                //  返回失败
-                   console.log(err);
+                    console.log(err);
                })
         //   console.log(params);
         } else {
