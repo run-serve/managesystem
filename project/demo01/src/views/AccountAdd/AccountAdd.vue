@@ -2,7 +2,7 @@
   <div class="account-add">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>添加账号</span>
+        <span class="accountWt">添加管理员账号</span>
       </div>
       <!-- 添加账号表单 -->
       <div class="from-style">
@@ -14,7 +14,7 @@
           label-width="100px"
           class="demo-ruleForm"
         >
-        <!-- 账号 -->
+          <!-- 账号 -->
           <el-form-item label="账号" prop="account">
             <el-input
               type="text"
@@ -45,7 +45,7 @@
               <el-option label="超级管理员" value="超级管理员"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item>
+          <el-form-item style="margin-left:80px;">
             <el-button type="primary" @click="submitForm('accountFrom')"
               >添加</el-button
             >
@@ -60,14 +60,18 @@
 <script>
 export default {
   data() {
-    const validatePwd = (_rule, value, callback) => {//rule：验证规则对象  value：输入的值 callback： 函数
-      if (value === "") {//验证非空
+    const validatePwd = (_rule, value, callback) => {
+      //rule：验证规则对象  value：输入的值 callback： 函数
+      if (value === "") {
+        //验证非空
         callback(new Error("请输入密码"));
-      } else if (value.length < 3 || value.length > 6) {//验证字符长度
+      } else if (value.length < 3 || value.length > 6) {
+        //验证字符长度
         callback(new Error("请输入3位到6位字符"));
       } else {
-        if (this.accountFrom.checkPass !== "") {//验证确认密码是否非空
-          this.$refs.accountFrom.validateField("checkPass");//validateField 方法是对部分数据做校验
+        if (this.accountFrom.checkPass !== "") {
+          //验证确认密码是否非空
+          this.$refs.accountFrom.validateField("checkPass"); //validateField 方法是对部分数据做校验
         }
         //成功调用
         callback();
@@ -108,40 +112,41 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {//验证valid 通true  否false
+      this.$refs[formName].validate((valid) => {
+        //验证valid 通true  否false
         if (valid) {
           // 收集添加账号信息
-          const params ={
-              account: this.accountFrom.account,
-              password:this.accountFrom.password,
-              userGroup:this.accountFrom.userGroup
-          }
+          const params = {
+            account: this.accountFrom.account,
+            password: this.accountFrom.password,
+            userGroup: this.accountFrom.userGroup,
+          };
           //发送axios
-          this.axios.post('http://127.0.0.1:666/account/accountadd/',this.qs.stringify(params))
-               .then(response => {
-                //接受后端数据
-                let {code, reason}=response.data;
-                if(code === 0){//成功
-                 //弹成功提示框
-                    this.$message({
-                    message: reason,
-                    type: 'success'
-                    });
-                 //跳账号管理列表
-                    this.$router.push('/index/accountmanagement');
-                }else if(code === 1){//失败
+          this.axios
+            .post("/account/accountadd/", params)
+            .then((res) => {
+              //接受后端数据
+              let { code, reason } = res;
+              if (code === 0) {
+                //成功
+                //弹成功提示框
+                this.$message({
+                  message: reason,
+                  type: "success",
+                });
+                //跳账号管理列表
+                this.$router.push("/index/accountmanagement");
+              } else if (code === 1) {
+                //失败
                 //  弹失败框
-                   this.$message.error(reason);
-                }
-               })
-               .catch(err =>{
-                    console.log(err);
-               })
-        //   console.log(params);
-        } else {
-          console.log("error loser!!");
-          return false;
-        }
+                this.$message.error(reason);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          //   console.log(params);
+        } 
       });
     },
     resetForm(formName) {

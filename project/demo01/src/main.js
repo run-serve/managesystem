@@ -13,18 +13,15 @@ import './assets/styles/css/demo.css';
 import App from './App.vue'
 import router from './router'
 
-//导入axios
-import axios from 'axios'
-//axios挂载到原型
-Vue.prototype.axios = axios;
+//封装axios
+import request  from './api/request'
+// 把request挂载Vue的原型上 所有vue实例对象共享
+Vue.prototype.axios = request;
 
-//导入qs
-import qs from 'qs'
-Vue.prototype.qs = qs;
+
 
 
 Vue.use(ElementUI)
-
 Vue.config.productionTip = false
 
 new Vue({

@@ -43,6 +43,6 @@ app.use(function(err, req, res, next) {
 });
 //监听端口
 app.listen(666, () => {
-  console.log('服务器启动成功，地址是:http://127.0.0.1:666')
-})
+  console.log('服务器启动成功，地址是:http://127.0.0.1:666');
+});
 module.exports = app;
