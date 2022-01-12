@@ -19,10 +19,24 @@ import request  from './api/request'
 Vue.prototype.axios = request;
 
 
-
-
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+
+//路由拦截
+router.beforeEach((to, from, next) => {
+  const token = window.localStorage.getItem('token');//获取token
+  //如果没有token
+  if(!token){
+    //如果是去登录，就放行，否则跳login
+    if(to.path === '/login'){
+     next(); //放行
+    }else{
+      next({path:'/login'});
+    }
+  }else{
+    next(); //放行
+  }
+})
 
 new Vue({
   router,

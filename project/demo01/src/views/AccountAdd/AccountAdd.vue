@@ -45,7 +45,7 @@
               <el-option label="超级管理员" value="超级管理员"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item style="margin-left:80px;">
+          <el-form-item>
             <el-button type="primary" @click="submitForm('accountFrom')"
               >添加</el-button
             >
@@ -60,7 +60,7 @@
 <script>
 export default {
   data() {
-    const validatePwd = (_rule, value, callback) => {
+    const validatePwd = (rule, value, callback) => {
       //rule：验证规则对象  value：输入的值 callback： 函数
       if (value === "") {
         //验证非空

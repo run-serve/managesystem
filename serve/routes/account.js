@@ -13,7 +13,7 @@ router.all('*',(req, res, next) => {
 	next();
 }) 
 
-// 接收账号请求 /*accountadd*/
+// 接收添加账号请求 /*accountadd*/
 router.post('/accountadd',(req, res) =>{
 	// 接收前端参数
 	let {account, password, userGroup} = req.body;
@@ -99,7 +99,77 @@ router.post('/accounteditsave',(req,res) =>{
              res.send({code:1,reason:'修改账号失败'});
         }
 	})
-	
 })
+
+// 接受要批量删除的请求/*accountBatch*/
+router.get('/accountBatch',(req,res)=>{
+	//接受前端传参
+	let { idArr } = req.query;
+	//根据前端传的id批量删除
+	//sql
+	const sqlStr = `delete from account where id in (${idArr})`;//使用in子句批量删除
+	// 执行sql
+	connection.query(sqlStr,(err,data)=>{
+		if (err) throw err;
+		if(data.affectedRows > 0){
+			//返回成功提示
+			res.send({code:0,reason:'批量删除账号成功'});
+		}
+		//返回失败
+		else{
+			res.send({code:1,reason:'批量删除账号失败'});
+		}
+	})	
+})
+
+//接受分页查询列表请求/*accountListPage*/
+router.get('/accountListPage',(req,res)=>{
+	//接受前端传参
+	let {currentPage,pageSize} = req.query;
+
+	//按照前端传的页码和条数查询
+	//sql
+	let sqlStr = `select * from account order by ctime desc`;
+	//执行sql
+	connection.query(sqlStr,(err,data)=>{
+		if (err) throw err;
+		//数据总条数
+		let count = data.length;
+		//计算跳过多少条
+        let n = (currentPage - 1) * pageSize;
+        //sql拼接 
+        sqlStr +=` limit ${n},${pageSize}`;
+        //执行sql查询对应页码的数据
+        connection.query(sqlStr,(err,data)=>{
+          if (err) throw err;
+          //把总条数和分页对应数据发给前端
+          res.send({count,data});
+        })     
+	})	
+})
+
+//接受修改密码的请求/*accountModifyPass*/
+router.post('/accountModifyPass',(req,res)=>{
+	//接受前端传参
+	let {id,pass,newPass} = req.body;
+    //根据前端传的id修改账号密码
+    //sql
+    const sqlStr = `update account set password='${newPass}' where id=${id}&&password=${pass}`;
+    //执行sql
+    connection.query(sqlStr,(err,data)=>{
+    	if (err) throw err;
+    	if (data.affectedRows > 0) {
+            //返回成功提示
+          res.send({code:0,reason:'修改密码成功'});
+        }
+           //返回失败提示
+        else{
+             res.send({code:1,reason:'原密码错误,请输入正确的原密码！'});
+        }
+    	
+    })
+})
+
+
 
 module.exports = router;
