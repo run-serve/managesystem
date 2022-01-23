@@ -63,7 +63,7 @@ export default {
               subMenuTitle: "账号添加",
             },
             {
-              path: "/index/passwordmodify",
+              path: "",//为空，不能单点密码修改
               subMenuTitle: "密码修改",
             },
           ],

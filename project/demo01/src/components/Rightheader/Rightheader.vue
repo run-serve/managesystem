@@ -21,7 +21,7 @@
             <div class="drop-down">
               <el-dropdown @command="handleCommand">
                 <span class="el-dropdown-link">
-                  admin
+                  {{account}}
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
@@ -43,12 +43,15 @@ export default {
   data() {
     return {
       adminId: 0,
+      account:"",
     };
   },
   methods: {
     handleCommand(command) {
       if (command === "personal") {
-        this.adminId = this.$route.query.id;
+        const id = window.localStorage.getItem('id');//获取存入token的id
+        this.adminId = id;
+        // console.log(id);
         this.$router.push("/index/PasswordModify?" + `id=${this.adminId}`); //跳密码修改
       }
       if (command === "exit") {
@@ -57,6 +60,9 @@ export default {
       }
     },
   },
+  created(){
+    this.account = window.localStorage.getItem('account');//获取存入token的account
+  }
 };
 </script>
 <style lang="less">

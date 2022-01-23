@@ -44,7 +44,7 @@ router.post('/loginSign',(req,res)=>{
 			   expiresIn:  60 * 60 * 2 //token到期时间，固定写法
 			});
 			const id = userInfo.id;
-     		res.send({code:0,reason:'欢迎登录!',token,id});
+     		res.send({code:0,reason:'欢迎登录!',token,id,account});
      	}else{
      		//登录失败
      		res.send({code:1,reason:'账号或者密码不正确!'});

@@ -10,21 +10,22 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item label="账号" prop="account">
+      <!-- 如果用了封装组件的话,如element,这个时候使用按键修饰符需要加上.native -->
+        <el-form-item label="账号" prop="account" @keydown.enter.native="submitForm('LoginForm')">
           <el-input
             type="text"
             v-model="LoginForm.account"
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
+        <el-form-item label="密码" prop="password" @keydown.enter.native="submitForm('LoginForm')">
           <el-input
             type="password"
             v-model="LoginForm.password"
             autocomplete="off"
           ></el-input>
         </el-form-item>
-        <el-form-item label="确认密码" prop="checkPass">
+        <el-form-item label="确认密码" prop="checkPass" @keydown.enter.native="submitForm('LoginForm')">
           <el-input
             type="password"
             v-model="LoginForm.checkPass"
@@ -103,17 +104,19 @@ export default {
           this.axios
             .post("/login/loginSign", params)
             .then((res) => {
-              let { code, reason, token,id} = res;
-              this.adminId = id;
+              let { code, reason, token,id,account} = res;
+              // this.adminId = id;
               if (code === 0) {
                  //把token存入浏览器，存键值对                    
-                window.localStorage.setItem('token',token); 
+                window.localStorage.setItem('token',token);
+                window.localStorage.setItem('id',id); 
+                window.localStorage.setItem('account',account);
                 this.$message({
                   message: reason,
                   type: "success",
                 });
                 //登录成功路由跳转到首页
-                this.$router.push("/index?" + `id=${this.adminId}`);
+                this.$router.push("/index");
               } else if (code === 1) {
                 // 登录失败提示
                 this.$message.error(reason);
