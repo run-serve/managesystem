@@ -21,7 +21,7 @@
             <div class="drop-down">
               <el-dropdown @command="handleCommand">
                 <span class="el-dropdown-link">
-                  {{account}}
+                  {{ account }}
                   <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
@@ -43,13 +43,13 @@ export default {
   data() {
     return {
       adminId: 0,
-      account:"",
+      account: "",
     };
   },
   methods: {
     handleCommand(command) {
       if (command === "personal") {
-        const id = window.localStorage.getItem('id');//获取存入token的id
+        const id = window.localStorage.getItem("id"); //获取存入token的id
         this.adminId = id;
         // console.log(id);
         this.$router.push("/index/PasswordModify?" + `id=${this.adminId}`); //跳密码修改
@@ -59,10 +59,23 @@ export default {
         this.$router.push("/login"); //跳回登录页
       }
     },
+    //第一种方法：通过token获取当前登录的用户名     第二种方法：单独请求接口，获取account
+    getAccountName() {
+      // this.account = window.localStorage.getItem("account"); //获取在login页面就存入token的account
+      this.axios
+      .get("/account/accountName")
+      .then((res)=>{
+        //接数据
+        this.account = res.accountName;
+      })
+      .catch((err)=>{
+        console.log(err);
+      })
+    },
   },
-  created(){
-    this.account = window.localStorage.getItem('account');//获取存入token的account
-  }
+  created() {
+    this.getAccountName();
+  },
 };
 </script>
 <style lang="less">

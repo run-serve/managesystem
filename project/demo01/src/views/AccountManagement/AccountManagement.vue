@@ -176,16 +176,16 @@ export default {
       this.axios
         .get("/account/accountListPage", params)
         .then((res) => {
-          let {count,data} = res;
-          this.accountTableData = data;//接分页数据
+          let { count, data } = res;
+          this.accountTableData = data; //接分页数据
           this.count = count; //接账号列表记录总数
 
           //优化当一页数据删除完后，会停留在当前页，显示无数据，进行优化
-          if(!data.length && this.currentPage > 1){
-               this.currentPage -= 1;//当前页码自减1
-               this.ListInformationPage();//再掉自己
-          };
-            //加载
+          if (!data.length && this.currentPage > 1) {
+            this.currentPage -= 1; //当前页码自减1
+            this.ListInformationPage(); //再掉自己
+          }
+          //加载
           setTimeout(() => {
             this.loading = false;
           }, 300);
@@ -239,7 +239,7 @@ export default {
     batchDelete() {
       // 如果不选就弹出提示，直接return不执行下面发送axios
       if (!this.fromIdData.length) {
-        this.$message.error("你是不是傻逼,请选择以后再操作!");
+        this.$message.error("请选择以后再操作!");
         return;
       }
       // 优化删除

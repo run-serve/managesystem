@@ -105,12 +105,11 @@ export default {
             .post("/login/loginSign", params)
             .then((res) => {
               let { code, reason, token,id,account} = res;
-              // this.adminId = id;
               if (code === 0) {
                  //把token存入浏览器，存键值对                    
                 window.localStorage.setItem('token',token);
-                window.localStorage.setItem('id',id); 
-                window.localStorage.setItem('account',account);
+                window.localStorage.setItem('id',id); //当前账号的id
+                window.localStorage.setItem('account',account);//当前账号名
                 this.$message({
                   message: reason,
                   type: "success",

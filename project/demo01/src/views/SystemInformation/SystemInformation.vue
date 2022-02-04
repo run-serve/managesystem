@@ -9,8 +9,8 @@
         <el-alert title="设置了回调的 alert" type="warning" @close="hello">
         </el-alert>
         <div class="tow-alter">
-        <el-alert  title="不可关闭的 alert" type="success" :closable="false">
-        </el-alert>
+          <el-alert title="不可关闭的 alert" type="success" :closable="false">
+          </el-alert>
         </div>
       </div>
 
@@ -20,7 +20,7 @@
             <span class="system">销售排行</span>
           </div>
           <div class="system-table">
-            <el-table :data="tableData" style="width: 100%" height="100%">
+            <el-table :data="tableData" height="100%">
               <el-table-column prop="name" label="商品名称" width="180">
               </el-table-column>
               <el-table-column prop="address" label="销量"> </el-table-column>
@@ -33,7 +33,7 @@
             <span class="system">缺货商品</span>
           </div>
           <div class="system-table">
-            <el-table :data="tableData" style="width: 100%" height="100%">
+            <el-table :data="tableData" height="100%">
               <el-table-column prop="date" label="商品名称" width="180">
               </el-table-column>
               <el-table-column prop="name" label="库存" width="180">
@@ -93,19 +93,20 @@ export default {
   width: 100%;
   padding-top: 20px;
   box-sizing: border-box;
-  
+  clear: both;
 }
-.tow-alter{
+.tow-alter {
   padding-top: 10px;
   box-sizing: border-box;
 }
 .box-card2,
 .box-card3 {
-  width: 800px;
+  width: calc(100vh - 150px);
+  display: inline-block;
 }
-.box-card2 {
+/* .box-card2 {
   float: left;
-}
+} */
 .box-card3 {
   float: right;
 }
@@ -115,8 +116,8 @@ export default {
 .system {
   font-weight: bold;
 }
-.system-table{
-  height: calc(65vh - 144px);
+.system-table {
+  height: calc(100vh - 465px);
   box-sizing: border-box;
 }
 </style>

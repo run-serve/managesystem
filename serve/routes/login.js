@@ -13,10 +13,12 @@ const secretkey = 'itsource';
 
 
 
+
 //拦截所有请求(设置响应头的封装)
 router.all('*',(req, res, next) => {
 	//设置响应头
-	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Origin", "*");//允许的域
+	res.header("Access-Control-Allow-Headers",  "authorization");//循序携带的头
 	//放行
 	next();
 })
