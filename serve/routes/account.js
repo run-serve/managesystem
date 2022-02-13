@@ -175,7 +175,9 @@ router.get('/accountListPage',(req,res)=>{
 //接受修改密码的请求/*accountModifyPass*/
 router.post('/accountModifyPass',(req,res)=>{
 	//接受前端传参
-	let {id,pass,newPass} = req.body;
+	let {pass,newPass} = req.body;
+	// 获取当前用户的id
+	let { id } = req.user.userInfo;
     //根据前端传的id修改账号密码
     //sql
     const sqlStr = `update account set password='${newPass}' where id=${id}&&password=${pass}`;
@@ -184,7 +186,7 @@ router.post('/accountModifyPass',(req,res)=>{
     	if (err) throw err;
     	if (data.affectedRows > 0) {
             //返回成功提示
-          res.send({code:0,reason:'修改密码成功'});
+          res.send({code:0,reason:'修改密码成功,请重新登陆！'});
         }
            //返回失败提示
         else{

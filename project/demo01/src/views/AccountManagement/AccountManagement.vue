@@ -99,7 +99,7 @@
               >确认修改</el-button
             >
             <!-- 密码修改跳转 -->
-            <el-button type="danger" @click="modifypass">密码修改</el-button>
+            <!-- <el-button type="danger" @click="modifypass">密码修改</el-button> -->
           </el-form-item>
         </el-form>
       </el-dialog>
@@ -359,10 +359,10 @@ export default {
       this.ListInformationPage();
     },
     //密码修改跳转
-    modifypass() {
-      //路由传值并跳转
-      this.$router.push("/index/PasswordModify?" + `id=${this.editId}`);
-    },
+    // modifypass() {
+    //   //路由传值并跳转
+    //   this.$router.push("/index/PasswordModify?" + `id=${this.editId}`);
+    // },
   },
   //过滤器时间格式化
   filters: {

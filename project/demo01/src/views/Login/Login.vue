@@ -108,8 +108,8 @@ export default {
               if (code === 0) {
                  //把token存入浏览器，存键值对                    
                 window.localStorage.setItem('token',token);
-                window.localStorage.setItem('id',id); //当前账号的id
-                window.localStorage.setItem('account',account);//当前账号名
+                // window.localStorage.setItem('id',id); //当前账号的id
+                // window.localStorage.setItem('account',account);//当前账号名
                 this.$message({
                   message: reason,
                   type: "success",

@@ -26,7 +26,7 @@
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item command="personal"
-                    >密码修改</el-dropdown-item
+                    >个人中心</el-dropdown-item
                   >
                   <el-dropdown-item command="exit">退出系统</el-dropdown-item>
                 </el-dropdown-menu>
@@ -42,17 +42,17 @@
 export default {
   data() {
     return {
-      adminId: 0,
+      // adminId: 0,
       account: "",
     };
   },
   methods: {
     handleCommand(command) {
       if (command === "personal") {
-        const id = window.localStorage.getItem("id"); //获取存入token的id
-        this.adminId = id;
+        // const id = window.localStorage.getItem("id"); //获取存入token的id
+        // this.adminId = id;
         // console.log(id);
-        this.$router.push("/index/PasswordModify?" + `id=${this.adminId}`); //跳密码修改
+        this.$router.push("/"); //跳个人中心
       }
       if (command === "exit") {
         window.localStorage.clear(); //清除所有token
