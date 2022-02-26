@@ -52,12 +52,15 @@ export default {
         // const id = window.localStorage.getItem("id"); //获取存入token的id
         // this.adminId = id;
         // console.log(id);
-        this.$router.push("/"); //跳个人中心
+        // this.$router.push("/"); //跳个人中心
       }
-      if (command === "exit") {
-        window.localStorage.clear(); //清除所有token
-        this.$router.push("/login"); //跳回登录页
-      }
+      setTimeout(() => {
+        if (command === "exit") {
+          window.localStorage.clear(); //清除所有token
+          this.$router.push("/login"); //跳回登录页
+          this.$message.success('退出成功！');
+        }
+      }, 500);
     },
     //第一种方法：通过token获取当前登录的用户名     第二种方法：单独请求接口，获取account
     getAccountName() {

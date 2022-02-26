@@ -22,11 +22,11 @@
             <template slot-scope="scope">{{ scope.row.account }}</template>
           </el-table-column>
           <!-- 用户组 -->
-          <el-table-column prop="name" label="用户组">
+          <el-table-column  label="用户组">
             <template slot-scope="scope">{{ scope.row.usergroup }}</template>
           </el-table-column>
           <!-- 日期 -->
-          <el-table-column prop="address" label="日期" show-overflow-tooltip>
+          <el-table-column  label="日期" show-overflow-tooltip>
             <template slot-scope="scope">{{
               scope.row.ctime | filtersCtime
             }}</template>
@@ -119,8 +119,8 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page="currentPage"
-          :page-sizes="[1, 3, 5, 10, 20, 30]"
-          :page-size="3"
+          :page-sizes="[1, 3, 5, 10, 15, 20, 30]"
+          :page-size="15"
           :total="count"
           layout="total, sizes, prev, pager, next, jumper"
         >
@@ -152,7 +152,7 @@ export default {
       editId: 0, //修改的id默认为0
       fromIdData: [], //存表格选中状态的id
       currentPage: 1, //当前页
-      pageSize: 3, //当前页多少条记录
+      pageSize: 15, //当前页多少条记录
       rules: {
         //验证
         account: [

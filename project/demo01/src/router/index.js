@@ -5,6 +5,11 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  //默认根目录
+  {
+    path:'/',
+    redirect:'/login'//路由重定向
+  },
    //登录
   {
     path: '/login',//路径
