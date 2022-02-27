@@ -7,7 +7,7 @@
       <!-- 面板内容 -->
       <div class="container">
         <div class="query">
-          <el-select v-model="value" clearable placeholder="- - -选择分类- - -">
+          <el-select v-model="value" clearable @change="find" placeholder="- - -选择分类- - -">
             <el-option
               v-for="item in options"
               :key="item.value"
@@ -112,9 +112,17 @@ export default {
         },
       ],
       value: "",
+      one:'',
     };
   },
-  methods: {},
+  methods: {
+    find(){
+      let params = {
+          one : this.value
+      }
+      console.log(params);
+    },
+  },
   created() {
     this.axios
       .get("/goods/goodsmanagement")

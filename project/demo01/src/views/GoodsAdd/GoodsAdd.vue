@@ -5,7 +5,86 @@
         <span class="system">商品添加</span>
       </div>
       <!-- 面板内容 -->
+      <!-- <div class="container"> -->
+        <el-form
+          :label-position="top"
+          :model="ruleForm"
+          :rules="rules"
+          ref="ruleForm"
+          class="demo-ruleForm"
+        >
+        <el-form-item label="所属分类" prop="region"><br>
+            <el-select v-model="ruleForm.region" placeholder="- - -选择分类- - -">
+              <el-option label="区域一" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
 
+          <el-form-item label="商品条形码" prop="name">
+            <el-input v-model="ruleForm.name"></el-input>
+          </el-form-item>
+
+            <el-form-item label="商品名称" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
+
+            
+            <el-form-item label="商品售价" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
+
+            
+            <el-form-item label="市场价" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
+
+            
+            <el-form-item label="商品进价" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
+
+            
+            <el-form-item label="入库数量" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
+
+            
+            <el-form-item label="商品重量" prop="name">
+              <el-input v-model="ruleForm.name"></el-input>
+            </el-form-item>
+
+            <el-form-item label="商品单位" prop="region"><br>
+                <el-select v-model="ruleForm.region" placeholder="- - -选择单位 - - -">
+                  <el-option label="区域一" value="shanghai"></el-option>
+                  <el-option label="区域二" value="beijing"></el-option>
+                </el-select>
+              </el-form-item>
+
+          <el-form-item label="会员优惠" prop="resource"><br>
+            <el-radio-group v-model="ruleForm.resource">
+              <el-radio label="享受"></el-radio>
+              <el-radio label="不享受"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+          
+          <el-form-item label="是否促销" prop="resource"><br>
+            <el-radio-group v-model="ruleForm.resource">
+              <el-radio label="启用"></el-radio>
+              <el-radio label="禁用"></el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item label="商品简介" prop="desc">
+            <el-input type="textarea" v-model="ruleForm.desc" placeholder="不超过200字"></el-input>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="primary" @click="submitForm('ruleForm')"
+              >添加</el-button
+            >
+            <el-button @click="resetForm('ruleForm')">重置</el-button>
+          </el-form-item>
+        </el-form>
+      <!-- </div> -->
     </el-card>
   </div>
 </template>
@@ -14,13 +93,57 @@
 export default {
   data() {
     return {
+      ruleForm: {
+        name: "",
+        region: "",
+        date1: "",
+        date2: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: "",
+      },
+       rules: {
+          name: [
+            { required: true, message: '请输入活动名称', trigger: 'blur' },
+            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          ],
+          region: [
+            { required: true, message: '请选择活动区域', trigger: 'change' }
+          ],
+          date1: [
+            { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+          ],
+          date2: [
+            { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
+          ],
+          type: [
+            { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
+          ],
+          resource: [
+            { required: true, message: '请选择活动资源', trigger: 'change' }
+          ],
+          desc: [
+            { required: true, message: '请填写活动形式', trigger: 'blur' }
+          ]
+        }
     };
   },
   methods: {
-    
-    
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
   },
-
 };
 </script>
 
@@ -30,6 +153,10 @@ export default {
   width: 100%;
   height: 100%;
 }
+/deep/.el-card__body{
+  height: calc(100vh - 290px);
+  overflow: auto;
+}
 .system {
   font-weight: bold;
 }
@@ -37,7 +164,8 @@ export default {
   background-color: rgb(244, 244, 244);
 }
 /* 容器 */
-/* .container {
-  height: calc(100vh - 300px);
-} */
+.container {
+   /* height: calc(100vh - 256px); */
+    /* border: 1px red solid; */
+}
 </style>

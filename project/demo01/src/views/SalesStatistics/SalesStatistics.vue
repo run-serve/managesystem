@@ -69,6 +69,7 @@ export default {
   },
   methods: {
     salesReports(val) {
+      //监听开始时间和结束时间
       if (val) {
         this.starTime = val[0], 
         this.endTime = val[1];
@@ -83,7 +84,7 @@ export default {
       //选中dom,使用echarts初始化
       const myCharts = this.$echarts.init(document.getElementById("box"));
       // console.log(myCharts);
-      // 收集数据
+      // 收集开始时间和结束时间的数据
       let params = {
         starTime: this.starTime,
         endTime: this.endTime,
