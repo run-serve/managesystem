@@ -6,6 +6,13 @@ const router = require('./jwt');
 const connection = require('./conn')
 
 //
+// 商品添加
+router.post('/goodsAdd',(req,res)=>{
+// 接收前端参数
+let {cateName, barCode, goodsName,costPrice,marketPrice,salePrice,goodsNum,goodsWeight,unit,discount,promotion,goodsDesc} = req.body;
+
+})
+
 router.get('/goodsmanagement',(req,res)=>{
 	res.send('1');
 

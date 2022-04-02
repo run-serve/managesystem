@@ -121,6 +121,7 @@ export default {
             password: this.accountFrom.password,
             userGroup: this.accountFrom.userGroup,
           };
+          console.log(params);
           //发送axios
           this.axios
             .post("/account/accountadd/", params)

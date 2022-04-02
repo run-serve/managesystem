@@ -7,11 +7,11 @@
 
       <div>
         <!-- #67C23A -->
-        <el-alert type="info" show-icon  @close="hello">
-          <span style="font-size:13px">
-            商品总数:{{ total }}&nbsp;&nbsp;
-            已销售的总金额:{{ 9999 }}&nbsp;&nbsp;
-            库存商品总价:{{ 1234 }}
+        <el-alert type="info" show-icon @close="hello">
+          <span style="font-size: 13px">
+            商品总数:{{ total }}&nbsp;&nbsp; 已销售的总金额:{{
+              9999
+            }}&nbsp;&nbsp; 库存商品总价:{{ 1234 }}
           </span>
         </el-alert>
         <div class="tow-alter">
@@ -76,12 +76,12 @@ export default {
   data() {
     return {
       tableData: [],
-      tableDataTwo:[],
+      tableDataTwo: [],
       fileListUpload: [],
       disbtn: false,
-      total:"",//商品总数
-      totalAmount:"",//销售总金额
-      totalInventoryPrice:"",//库存总价
+      total: "", //商品总数
+      totalAmount: "", //销售总金额
+      totalInventoryPrice: "", //库存总价
     };
   },
   methods: {
@@ -165,14 +165,25 @@ export default {
         reader.readAsBinaryString(f);
       }
     },
-    informationAggregation(count){
+    informationAggregation(count) {
       // console.log(count);
       this.total = count;
-    }
+    },
+    //刷新页面
+    refresh() {
+      let url = location.href; //把当前页面的地址赋给变量 url
+      let times = url.split("?"); //分切变量 url 分隔符号为 "?"
+      if (times[1] != 1) {
+        //如果?后的值不等于1表示没有刷新
+        url += "?1"; //把变量 url 的值加入 ?1
+        self.location.replace(url); //刷新页面
+      }
+    },
   },
-  created(){
+  created() {
     this.informationAggregation(0);
-  }
+    // this.refresh();
+  },
 };
 </script>
 
@@ -214,17 +225,17 @@ export default {
   box-sizing: border-box;
 }
 /* 导入按钮 */
-.importBtn{
+.importBtn {
   margin: 0;
   padding: 0;
-  height:26px;
+  height: 26px;
   width: 80px;
 }
 /* alter */
-.el-alert{
-  background-color:#f0f9eb;
+.el-alert {
+  background-color: #f0f9eb;
 }
-.el-alert--info.is-light{
+.el-alert--info.is-light {
   color: pink;
 }
 </style>

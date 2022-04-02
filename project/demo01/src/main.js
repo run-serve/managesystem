@@ -32,18 +32,36 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 //路由拦截
+import {Message} from 'element-ui'
 router.beforeEach((to, from, next) => {
+  const timeOver = 10000;
   const token = window.localStorage.getItem('token');//获取token
-  //如果没有token
+  const tokenStartTime = window.localStorage.getItem('tokenStartTime');//获取存储token的开始时间   
+  // 如果没有token
   if(!token){
-    //如果是去登录，就放行，否则跳login
-    if(to.path === '/login'){
+    if(to.path === '/login'){//如果是去登录，就放行
      next(); //放行
-    }else{
+    }else{  //否则跳login
       next({path:'/login'});
     }
-  }else{
-    next(); //放行
+  }
+  if(token){
+      // let url = location.href;
+      // let urls= url.substring(url.lastIndexOf("/") + 1);
+      let date = new Date().getTime();
+      if(date - tokenStartTime > timeOver) {// 如果大于说明是token过期了
+        window.localStorage.clear(); //如果超过时间清除所有token
+        Message.warning("登录状态已过期,请重新登录!")
+        next({path:'/login'});
+        // console.clear();
+      }
+      
+      else{
+        next();
+        // this.$router.push("url");
+      }
+    
+    
   }
 })
 

@@ -44,7 +44,7 @@ router.post('/loginSign',(req,res)=>{
 			const token = jwt.sign({
 			   userInfo,    //你要加密的对象
 			}, secretKey, {     //secretkey
-			   expiresIn:  60*60*2 //token到期时间，固定写法
+			   expiresIn:  60*60*0.5 //token到期时间，固定写法
 			});
      		res.send({code:0,reason:'欢迎登录!',token,account});
      	}else{

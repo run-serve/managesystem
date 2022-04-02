@@ -183,7 +183,7 @@ export default {
           //优化当一页数据删除完后，会停留在当前页，显示无数据，进行优化
           if (!data.length && this.currentPage > 1) {
             this.currentPage -= 1; //当前页码自减1
-            this.ListInformationPage(); //再掉自己
+            this.ListInformationPage(); //再调自己
           }
           //加载
           setTimeout(() => {
